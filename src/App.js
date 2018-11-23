@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './components/Form';
 import WeatherDisplayModal from './components/WeatherDisplayModal';
+import SearchFail from './components/SearchFail';
 import './App.css';
 
 const axios = require('axios');
@@ -13,6 +14,7 @@ class App extends Component {
       weatherMeasurement: 'imperial',
       weatherData: '',
       modal: false,
+      searchFail: false,
     };
   }
   handleFormChange = event => {
@@ -29,8 +31,11 @@ class App extends Component {
         }&appid=d4a2cc67f7630a31cb669829cb6ee6f0`
       )
       .then(data => {
-        this.setState({ weatherData: data.data.main });
+        this.setState({ weatherData: data.data.main, searchFail: false });
         this.toggleModal();
+      })
+      .catch(err => {
+        this.setState({ searchFail: true });
       });
   };
   toggleModal = () => {
@@ -38,11 +43,17 @@ class App extends Component {
       modal: !this.state.modal,
     });
   };
+  closePopover = () => {
+    this.setState({
+      searchFail: false,
+    });
+  };
   render() {
     return (
       <div className="App">
         <h1>Local Weather Forecast</h1>
         <Form handleFormChange={this.handleFormChange} handleFormSubmit={this.handleFormSubmit} />
+        <SearchFail searchFail={this.state.searchFail} closePopover={this.closePopover} />
         <WeatherDisplayModal
           weatherData={this.state.weatherData}
           weatherMeasurement={this.state.weatherMeasurement}

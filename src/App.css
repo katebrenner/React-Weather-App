@@ -13,6 +13,9 @@ body {
   padding: 50px;
 }
 
+.popover {
+  padding: 5px;
+}
 @media only screen and (max-width: 600px) {
   .form {
     width: 90%;
