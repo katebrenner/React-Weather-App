@@ -21,9 +21,7 @@ class App extends Component {
     this.setState(newState);
   };
   handleFormSubmit = event => {
-    console.log('called');
     event.preventDefault();
-    console.log('called handleform submit', this.state.city);
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=${
@@ -31,7 +29,6 @@ class App extends Component {
         }&appid=d4a2cc67f7630a31cb669829cb6ee6f0`
       )
       .then(data => {
-        console.log(data.data);
         this.setState({ weatherData: data.data.main });
         this.toggleModal();
       });
@@ -42,13 +39,9 @@ class App extends Component {
     });
   };
   render() {
-    console.log('weatherData', this.state.weatherData);
-    console.log('weatherMeasurement', this.state.weatherMeasurement);
-    console.log('city', this.state.city);
-
     return (
       <div className="App">
-        <h1>Local Weather Forcast</h1>
+        <h1>Local Weather Forecast</h1>
         <Form handleFormChange={this.handleFormChange} handleFormSubmit={this.handleFormSubmit} />
         <WeatherDisplayModal
           weatherData={this.state.weatherData}
