@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Form from './components/Form';
-import WeatherDisplay from './components/WeatherDisplay';
+import WeatherDisplayModal from './components/WeatherDisplayModal';
 import './App.css';
 
 const axios = require('axios');
@@ -12,6 +12,7 @@ class App extends Component {
       city: '',
       weatherMeasurement: 'imperial',
       weatherData: '',
+      modal: false,
     };
   }
   handleFormChange = event => {
@@ -32,7 +33,13 @@ class App extends Component {
       .then(data => {
         console.log(data.data);
         this.setState({ weatherData: data.data.main });
+        this.toggleModal();
       });
+  };
+  toggleModal = () => {
+    this.setState({
+      modal: !this.state.modal,
+    });
   };
   render() {
     console.log('weatherData', this.state.weatherData);
@@ -41,10 +48,15 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Local weather forcast</h1>
+        <h1>Local Weather Forcast</h1>
         <Form handleFormChange={this.handleFormChange} handleFormSubmit={this.handleFormSubmit} />
         <h2>{this.state.city}</h2>
-        <WeatherDisplay weatherData={this.state.weatherData} weatherMeasurement={this.state.weatherMeasurement} />
+        <WeatherDisplayModal
+          weatherData={this.state.weatherData}
+          weatherMeasurement={this.state.weatherMeasurement}
+          modal={this.state.modal}
+          toggleModal={this.toggleModal}
+        />
       </div>
     );
   }
