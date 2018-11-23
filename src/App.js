@@ -50,7 +50,6 @@ class App extends Component {
       <div className="App">
         <h1>Local Weather Forcast</h1>
         <Form handleFormChange={this.handleFormChange} handleFormSubmit={this.handleFormSubmit} />
-        <h2>{this.state.city}</h2>
         <WeatherDisplayModal
           weatherData={this.state.weatherData}
           weatherMeasurement={this.state.weatherMeasurement}

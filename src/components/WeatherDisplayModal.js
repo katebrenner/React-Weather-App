@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
 
 class WeatherDisplayModal extends Component {
   render() {
@@ -12,10 +12,8 @@ class WeatherDisplayModal extends Component {
             Temperature:{this.props.weatherData.temp} {this.props.weatherMeasurement === 'imperial' ? 'F' : 'C'}{' '}
           </h1>
           <h1>Humidity:{this.props.weatherData.humidity}%</h1>
+          <h1>Pressure: {this.props.weatherData.pressure} hPa</h1>
           <ModalFooter>
-            <Button color="primary" onClick={this.props.toggleModal}>
-              Do Something
-            </Button>{' '}
             <Button color="secondary" onClick={this.props.toggleModal}>
               Cancel
             </Button>
