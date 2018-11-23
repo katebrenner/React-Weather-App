@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Form from './components/Form';
+import WeatherDisplay from './components/WeatherDisplay';
 import './App.css';
 
 const axios = require('axios');
@@ -9,7 +10,7 @@ class App extends Component {
     super();
     this.state = {
       city: '',
-      weatherMeasurement: 'F',
+      weatherMeasurement: 'imperial',
       weatherData: '',
     };
   }
@@ -24,9 +25,12 @@ class App extends Component {
     console.log('called handleform submit', this.state.city);
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=d4a2cc67f7630a31cb669829cb6ee6f0`
+        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=${
+          this.state.weatherMeasurement
+        }&appid=d4a2cc67f7630a31cb669829cb6ee6f0`
       )
       .then(data => {
+        console.log(data.data);
         this.setState({ weatherData: data.data.main });
       });
   };
@@ -40,6 +44,7 @@ class App extends Component {
         <h1>Local weather forcast</h1>
         <Form handleFormChange={this.handleFormChange} handleFormSubmit={this.handleFormSubmit} />
         <h2>{this.state.city}</h2>
+        <WeatherDisplay weatherData={this.state.weatherData} weatherMeasurement={this.state.weatherMeasurement} />
       </div>
     );
   }
