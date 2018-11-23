@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 
-export default class SearchFail extends Component {
+class SearchFail extends Component {
   render() {
     return (
       <div>
@@ -16,3 +16,5 @@ export default class SearchFail extends Component {
     );
   }
 }
+
+export default SearchFail;

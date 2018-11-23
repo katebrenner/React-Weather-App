@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from './components/Form';
+import Form from './components/weatherForm';
 import WeatherDisplayModal from './components/WeatherDisplayModal';
 import SearchFail from './components/SearchFail';
 import './App.css';
@@ -26,7 +26,7 @@ class App extends Component {
     event.preventDefault();
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=${
+        `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city},us&units=${
           this.state.weatherMeasurement
         }&appid=d4a2cc67f7630a31cb669829cb6ee6f0`
       )
@@ -48,11 +48,15 @@ class App extends Component {
       searchFail: false,
     });
   };
-  render() {
+  render = () => {
     return (
       <div className="App">
         <h1>Local Weather Forecast</h1>
-        <Form handleFormChange={this.handleFormChange} handleFormSubmit={this.handleFormSubmit} />
+        <Form
+          handleFormChange={this.handleFormChange}
+          handleFormSubmit={this.handleFormSubmit}
+          weatherMeasurement={this.state.weatherMeasurement}
+        />
         <SearchFail searchFail={this.state.searchFail} closePopover={this.closePopover} />
         <WeatherDisplayModal
           weatherData={this.state.weatherData}
@@ -62,7 +66,7 @@ class App extends Component {
         />
       </div>
     );
-  }
+  };
 }
 
 export default App;

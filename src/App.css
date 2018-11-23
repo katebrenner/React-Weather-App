@@ -11,13 +11,26 @@ body {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.5);
   padding: 50px;
+  text-align: center;
+}
+
+.dropDown {
+  width: 75%;
+  margin: 0 auto;
 }
 
 .popover {
   padding: 5px;
 }
+
 @media only screen and (max-width: 600px) {
   .form {
     width: 90%;
+  }
+  .weatherModalText {
+    font-size: 2em;
+  }
+  .dropDown {
+    width: 100%;
   }
 }
